@@ -1,0 +1,4 @@
+rootProject.name = 'campsite-reservations'
+
+include("core")
+include("application")

@@ -1,0 +1,6 @@
+spring:
+  mvc.pathmatch.matching-strategy: ant-path-matcher
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+    default-property-inclusion: non_empty
+spring.h2.console.enabled: true
