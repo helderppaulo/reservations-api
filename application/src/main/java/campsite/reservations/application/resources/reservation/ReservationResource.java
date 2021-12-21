@@ -1,5 +1,7 @@
-package campsite.reservations.application.resources;
+package campsite.reservations.application.resources.reservation;
 
+import campsite.reservations.application.resources.ResourceResult;
+import campsite.reservations.application.resources.ResultResponseUnwrapper;
 import campsite.reservations.core.ReservationScheduler;
 import campsite.reservations.core.base.Result;
 import campsite.reservations.core.business.reservation.ReservationCreationRequest;

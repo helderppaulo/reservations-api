@@ -1,4 +1,4 @@
-package campsite.reservations.application.schedulers;
+package campsite.reservations.application.job;
 
 import campsite.reservations.core.ReservationScheduler;
 import campsite.reservations.core.base.Result;
@@ -23,7 +23,7 @@ public class ScheduleCreationJob {
     @Autowired
     private ReservationScheduler reservationScheduler;
 
-    @Scheduled(fixedRate = 24 * 60 * 60 * 1000)
+    @Scheduled(cron = "0 0 * * * ?")
     public void createScheduleJob() {
         createSchedule();
     }

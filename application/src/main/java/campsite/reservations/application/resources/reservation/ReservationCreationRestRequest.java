@@ -1,4 +1,4 @@
-package campsite.reservations.application.resources;
+package campsite.reservations.application.resources.reservation;
 
 import lombok.Data;
 
