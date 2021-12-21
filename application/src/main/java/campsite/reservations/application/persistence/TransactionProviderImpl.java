@@ -11,7 +11,7 @@ public class TransactionProviderImpl implements TransactionProvider {
 
     @Override
     @Transactional
-    public <T> T executeTransactionally(final Supplier<T> supplier) {
+    public <T> T executeAtomically(final Supplier<T> supplier) {
         return supplier.get();
     }
 }

@@ -17,4 +17,6 @@ public interface ScheduleRepository {
     List<ScheduleDate> retrieveScheduleDates(LocalDate begin, LocalDate end);
 
     void updateScheduleDateReservation(LocalDate date, UUID reservationId);
+
+    ScheduleDate saveScheduleDate(ScheduleDate date);
 }

@@ -1,7 +1,7 @@
 package campsite.reservations.application.persistence.schedule;
 
-import campsite.reservations.core.domain.ScheduleDate;
 import campsite.reservations.application.persistence.reservation.ReservationMapper;
+import campsite.reservations.core.domain.ScheduleDate;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass

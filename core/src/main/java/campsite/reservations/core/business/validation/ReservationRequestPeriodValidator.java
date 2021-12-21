@@ -6,7 +6,7 @@ import campsite.reservations.core.domain.BusinessViolation;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public class ReservationPeriodValidator implements ReservationValidator {
+public class ReservationRequestPeriodValidator implements ReservationValidator {
 
     private static final long MINIMUM_TIME_AHEAD_DAYS = 1L;
     private static final long MAXIMUM_TIME_AHEAD_DAYS = 30L;
@@ -20,6 +20,6 @@ public class ReservationPeriodValidator implements ReservationValidator {
 
     @Override
     public BusinessViolation violation() {
-        return BusinessViolation.INVALID_RESERVATION_PERIOD;
+        return BusinessViolation.INVALID_RESERVATION_REQUEST_PERIOD;
     }
 }

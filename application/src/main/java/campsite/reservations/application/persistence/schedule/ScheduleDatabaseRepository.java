@@ -59,4 +59,11 @@ public class ScheduleDatabaseRepository implements ScheduleRepository {
         scheduleDate.setReservation(reservation);
         scheduleDateCrudRepository.save(scheduleDate);
     }
+
+    @Override
+    public ScheduleDate saveScheduleDate(final ScheduleDate scheduleDate) {
+        final ScheduleDateEntity entity = ScheduleDateEntity.builder().date(scheduleDate.getDate()).build();
+        final ScheduleDateEntity persistedEntity = scheduleDateCrudRepository.save(entity);
+        return ScheduleDateMapper.fromEntity(persistedEntity);
+    }
 }

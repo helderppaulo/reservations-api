@@ -12,7 +12,6 @@ import campsite.reservations.core.repository.TransactionProvider;
 import lombok.AllArgsConstructor;
 
 import java.time.LocalDate;
-import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.UUID;
@@ -33,12 +32,14 @@ public class ReservationCreationService {
 
     private Result<ReservationCreationRequest> validate(final ReservationCreationRequest request) {
         final List<BusinessViolation> violations = this.validator.validate(request);
-        if (violations.isEmpty()) return Result.successful(request);
-        else return Result.businessError(violations);
+        if (violations.isEmpty())
+            return Result.successful(request);
+        else
+            return Result.businessError(violations);
     }
 
     private Reservation saveReservationAtomically(final ReservationCreationRequest request) {
-        return transactionProvider.executeTransactionally(() -> {
+        return transactionProvider.executeAtomically(() -> {
             final Reservation reservation = reservationRepository.saveReservation(buildReservation(request));
             updateSchedule(reservation.getId(), request.getCheckInDate(), request.getCheckOutDate());
             return reservation;

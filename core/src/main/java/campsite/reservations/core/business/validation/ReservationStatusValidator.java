@@ -17,7 +17,7 @@ public class ReservationStatusValidator implements ReservationValidator {
     public boolean validate(final ReservationRequest request) {
         return ofNullable(request.getReservationId())
                 .flatMap(repository::fetchReservation)
-                .filter((r) -> r.getStatus() == ReservationStatus.CANCELED)
+                .filter((r) -> r.getStatus() == ReservationStatus.CANCELLED)
                 .isEmpty();
     }
 

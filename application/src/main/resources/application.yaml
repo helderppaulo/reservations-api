@@ -4,3 +4,5 @@ spring:
     property-naming-strategy: SNAKE_CASE
     default-property-inclusion: non_empty
 spring.h2.console.enabled: true
+
+schedule.control.id: 11112222-3333-4444-5555-666677778888

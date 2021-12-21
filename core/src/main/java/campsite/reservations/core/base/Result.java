@@ -62,8 +62,16 @@ public final class Result<T> {
         return fn.apply(this.violations);
     }
 
+    public List<BusinessViolation> unwrapBusinessError() {
+        return this.violations;
+    }
+
     public <U> U unwrapException(final Function<Exception, U> fn) {
         return fn.apply(this.exception);
+    }
+
+    public Exception unwrapException() {
+        return this.exception;
     }
 
     public boolean isSuccess() {

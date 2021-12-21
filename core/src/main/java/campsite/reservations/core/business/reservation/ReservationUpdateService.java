@@ -11,7 +11,6 @@ import campsite.reservations.core.repository.TransactionProvider;
 import lombok.AllArgsConstructor;
 
 import java.time.LocalDate;
-import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
@@ -40,16 +39,16 @@ public class ReservationUpdateService {
     private Result<Reservation> updateReservationAtomically(final ReservationUpdateRequest request) {
         final Optional<Reservation> reservation = reservationRepository.fetchReservation(request.getReservationId());
         if (reservation.isEmpty()) return Result.businessError(BusinessViolation.RESERVATION_NOT_FOUND);
-        return Result.fromSupplier(() -> transactionProvider.executeTransactionally(() -> {
+        return Result.fromSupplier(() -> transactionProvider.executeAtomically(() -> {
             final Reservation current = reservation.get();
-            clearPreviousSchedule(request.getReservationId(), current.getCheckInDate(), current.getCheckOutDate());
+            clearPreviousSchedule(request.getReservationId());
             updateSchedule(request.getReservationId(), request.getCheckInDate(), request.getCheckOutDate());
             return updateReservationInterval(request, current);
         }));
     }
 
-    private void clearPreviousSchedule(final UUID reservationId, final LocalDate begin, final LocalDate end) {
-        final List<ScheduleDate> dates = scheduleRepository.retrieveUnreservedScheduleDatesLocking(begin, end, reservationId);
+    private void clearPreviousSchedule(final UUID reservationId) {
+        final List<ScheduleDate> dates = scheduleRepository.retrieveScheduleDatesByReservationLocking(reservationId);
         dates.forEach(date -> scheduleRepository.updateScheduleDateReservation(date.getDate(), null));
     }
 
@@ -60,7 +59,7 @@ public class ReservationUpdateService {
     }
 
     private void checkScheduleVacancy(final List<ScheduleDate> dates, final LocalDate begin, final LocalDate end) {
-        final long days = Period.between(begin, end).get(ChronoUnit.DAYS);
+        final long days = ChronoUnit.DAYS.between(begin, end);
         if (days != dates.size()) throw new RuntimeException("inconsistent schedule");
     }
 

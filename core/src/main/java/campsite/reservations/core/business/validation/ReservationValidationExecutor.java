@@ -6,14 +6,14 @@ import campsite.reservations.core.domain.BusinessViolation;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public final class ReservationValidationExecutor {
+public class ReservationValidationExecutor {
 
     private final List<ReservationValidator> validators;
 
     public ReservationValidationExecutor(
             final ReservationConsistencyValidator consistencyValidator,
             final ReservationDurationValidator durationValidator,
-            final ReservationPeriodValidator periodValidator,
+            final ReservationRequestPeriodValidator periodValidator,
             final ReservationStatusValidator statusValidator,
             final ReservationVacancyValidator vacancyValidator
     ) {

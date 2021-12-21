@@ -27,9 +27,9 @@ public class ReservationCancellationService {
     }
 
     private Reservation updateReservationAtomically(final UUID id) {
-        return transactionProvider.executeTransactionally(() -> {
+        return transactionProvider.executeAtomically(() -> {
             updateSchedule(id);
-            return reservationRepository.updateReservationStatus(id, ReservationStatus.CANCELED);
+            return reservationRepository.updateReservationStatus(id, ReservationStatus.CANCELLED);
         });
     }
 
