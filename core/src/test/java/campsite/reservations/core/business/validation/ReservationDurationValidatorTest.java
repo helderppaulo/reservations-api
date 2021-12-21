@@ -37,7 +37,7 @@ public class ReservationDurationValidatorTest {
 
         final boolean result = validator.validate(request);
 
-        Assertions.assertFalse(result);
+        Assertions.assertTrue(result);
     }
 
     @Test

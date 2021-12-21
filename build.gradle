@@ -6,9 +6,10 @@ plugins {
 
 group = 'campsite'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
+sourceCompatibility = '11'
 
 bootJar.enabled = false
+jar.enabled = false
 
 configurations {
     compileOnly {
