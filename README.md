@@ -1,4 +1,4 @@
-# Campsite Reservations
+# Reservations API
 This project is divided into two modules following hexagonal architecture. The core module contains the business rules and is independent of any storage or communication technology. And another one named application, where the core library is packed and exposed via http rest interface.
 The core module uses no compile time libraries and store and fetch data through dependency injection.
 
